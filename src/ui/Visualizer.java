@@ -11,10 +11,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Visualizer {
+public class Visualizer implements engine.GamePlayInterface {
     final private BufferedReader reader = new BufferedReader(
             new InputStreamReader(System.in));
-    public void printBoard(State gameState) {
+    @Override
+    public void announceBoard(State gameState) {
         Board board = gameState.getCurrentPositions();
         System.out.println(Color.values()[0] + "\t" + Color.values()[1]);
         for(int i=0; i<Positions.getSize(); ++i) {
@@ -27,10 +28,12 @@ public class Visualizer {
         }
     }
 
-    public void printCard(State gameState) {
+    @Override
+    public void announceCard(State gameState) {
         System.out.println("You drew a " + gameState.getNextCard());
     }
 
+    @Override
     public State getMove(ArrayList<State> options) {
         try {
             reader.readLine();
