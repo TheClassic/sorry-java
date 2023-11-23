@@ -8,4 +8,6 @@ public interface GamePlayInterface {
     void announceCard(State gameState);
 
     State getMove(ArrayList<State> options);
+
+    void announceWinner(Color winner);
 }

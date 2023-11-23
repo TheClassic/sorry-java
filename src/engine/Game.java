@@ -15,6 +15,7 @@ public class Game {
             state = gamePlayInterface.getMove(Options.getOptions(state));
             state.finishTurn();
         }
+        gamePlayInterface.announceWinner(state.getWinner());
     }
 
 

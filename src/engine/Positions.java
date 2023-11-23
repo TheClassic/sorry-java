@@ -1,8 +1,11 @@
 package engine;
 
+import java.util.Optional;
+
 public class Positions {
     static public int getSize() { return 2;}
     static public int HOME = 10;
+    static public int FINISH = 10;
     static public int START = 0;
     int[] pawnLocations = {0, 0};
 

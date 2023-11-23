@@ -43,4 +43,9 @@ public class Visualizer implements engine.GamePlayInterface {
         }
         return options.getFirst();
     }
+
+    @Override
+    public void announceWinner(Color winner) {
+        System.out.println(winner + " won the game!");
+    }
 }
