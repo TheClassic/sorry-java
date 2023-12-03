@@ -28,8 +28,8 @@ public class Visualizer implements engine.GamePlayInterface {
     }
 
     @Override
-    public void announceCard(State gameState) {
-        System.out.println("You drew a " + gameState.getNextCard());
+    public void announceCard(int cardValue) {
+        System.out.println("You drew a " + cardValue);
     }
 
     @Override

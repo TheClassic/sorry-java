@@ -12,7 +12,7 @@ public class GameSimulator implements engine.GamePlayInterface {
     }
 
     @Override
-    public void announceCard(State gameState) {
+    public void announceCard(int cardValue) {
     }
 
     @Override

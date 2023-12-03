@@ -11,7 +11,8 @@ public class Game {
     public void run() {
         while(!state.gameOver()) {
             gamePlayInterface.announceBoard(state);
-            gamePlayInterface.announceCard(state);
+
+            gamePlayInterface.announceCard(state.getNextCard());
             state = gamePlayInterface.getMove(Options.getOptions(state));
             state.finishTurn();
         }
@@ -21,6 +22,4 @@ public class Game {
     public Color getWinner() {
         return state.getWinner();
     }
-
-
 }
