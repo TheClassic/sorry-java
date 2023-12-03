@@ -18,5 +18,9 @@ public class Game {
         gamePlayInterface.announceWinner(state.getWinner());
     }
 
+    public Color getWinner() {
+        return state.getWinner();
+    }
+
 
 }

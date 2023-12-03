@@ -1,4 +1,5 @@
 import engine.Game;
+import simulator.MonteCarloEngine;
 import ui.Visualizer;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -11,8 +12,7 @@ public class Main {
 
         // Press Shift+F10 or click the green arrow button in the gutter to run the code.
 
-        Game executor = new Game(new Visualizer());
-        executor.run();
+        new MonteCarloEngine().run();
 
         // Press Shift+F9 to start debugging your code. We have set one breakpoint
         // for you, but you can always add more by pressing Ctrl+F8.
