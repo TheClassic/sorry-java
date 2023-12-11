@@ -1,5 +1,6 @@
 package engine;
 
+// actual board is configured green, red, blue, yellow
 public enum Color {
-    GREEN, YELLOW;
+    GREEN, RED, BLUE, YELLOW
 }

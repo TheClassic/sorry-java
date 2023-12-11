@@ -1,13 +1,29 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import static engine.Color.RED;
+import static engine.Color.YELLOW;
 
 public class Game {
-    private State state = new State();
+    private State state;
     final private GamePlayInterface gamePlayInterface;
+
+    private final Random random = new Random();
 
     public Game(GamePlayInterface gpi) {
         gamePlayInterface = gpi;
+        state = new State(this, getFirstPLayer());
+    }
+
+    private Color getFirstPLayer() {
+        Color firstPlayer = Color.values()[random.nextInt(Color.values().length)];
+        // so dirty, but should work well
+        if(!isPlayerActive(firstPlayer)) {
+            firstPlayer = getFirstPLayer();
+        }
+        return firstPlayer;
     }
 
     public void run() {
@@ -22,6 +38,10 @@ public class Game {
         }
         gamePlayInterface.announceWinner(state.getWinner());
         gamePlayInterface.announceBoard(state);
+    }
+
+    public boolean isPlayerActive(Color player) {
+        return player == YELLOW || player == RED;
     }
 
     public Color getWinner() {

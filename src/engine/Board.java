@@ -12,7 +12,10 @@ public class Board {
     private static Gson gson = new GsonBuilder().create();
 
     public Board() {
+        //TODO make this a loop
         positions.add(Color.GREEN.ordinal(), new Positions());
+        positions.add(Color.RED.ordinal(), new Positions());
+        positions.add(Color.BLUE.ordinal(), new Positions());
         positions.add(Color.YELLOW.ordinal(), new Positions());
     }
 
