@@ -3,15 +3,24 @@ package engine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 // Color is the index
-public class Board extends ArrayList<Positions> {
+public class Board {
+    private ArrayList<Positions> positions = new ArrayList<>();
+    private static Gson gson = new GsonBuilder().create();
+
     public Board() {
-        this.add(Color.GREEN.ordinal(), new Positions());
-        this.add(Color.YELLOW.ordinal(), new Positions());
+        positions.add(Color.GREEN.ordinal(), new Positions());
+        positions.add(Color.YELLOW.ordinal(), new Positions());
+    }
+
+    public Board clone() {
+        return gson.fromJson(gson.toJson(this), Board.class);
     }
     public Positions get(Color color) {
-        return get(color.ordinal());
+        return positions.get(color.ordinal());
     }
     
     public Optional<Color> findWinner() {

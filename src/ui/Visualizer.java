@@ -19,7 +19,8 @@ public class Visualizer implements engine.GamePlayInterface {
         System.out.println(Color.values()[0] + "\t" + Color.values()[1]);
         for(int i=0; i<Positions.getSize(); ++i) {
             String row = "";
-            for(Positions positions : board) {
+            for (Color color : Color.values()) {
+                Positions positions = board.get(color);
                 row += (positions.getPawnLocation(i));
                 row += "\t\t";
             }
