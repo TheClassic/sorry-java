@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.ArrayList;
+
 public class Game {
     private State state = new State();
     final private GamePlayInterface gamePlayInterface;
@@ -13,10 +15,13 @@ public class Game {
             gamePlayInterface.announceBoard(state);
 
             gamePlayInterface.announceCard(state.getNextCard());
-            state = gamePlayInterface.getMove(Options.getOptions(state));
+            ArrayList<Board> possibleMoves = Options.getOptions(state);
+            int desiredMove = gamePlayInterface.getMove(possibleMoves);
+            state.makeMove(possibleMoves.get(desiredMove));
             state.finishTurn();
         }
         gamePlayInterface.announceWinner(state.getWinner());
+        gamePlayInterface.announceBoard(state);
     }
 
     public Color getWinner() {

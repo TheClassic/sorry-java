@@ -13,8 +13,8 @@ public class Positions {
         return pawnLocations[n];
     }
 
-    public void movePawn(int pawn, int location) {
-        pawnLocations[pawn] = location;
+    public void movePawn(int pawn, int destination) {
+        pawnLocations[pawn] = destination;
     }
 
     public boolean allPawnsAtFinish() {

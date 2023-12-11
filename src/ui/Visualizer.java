@@ -34,14 +34,14 @@ public class Visualizer implements engine.GamePlayInterface {
     }
 
     @Override
-    public State getMove(ArrayList<State> options) {
+    public int getMove(ArrayList<Board> options) {
         try {
             reader.readLine();
         }
         catch(IOException e) {
             e.printStackTrace();
         }
-        return options.getFirst();
+        return 0;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package simulator;
 
+import engine.Board;
 import engine.Color;
 import engine.State;
 
@@ -16,8 +17,8 @@ public class GameSimulator implements engine.GamePlayInterface {
     }
 
     @Override
-    public State getMove(ArrayList<State> options) {
-        return options.getFirst();
+    public int getMove(ArrayList<Board> options) {
+        return 0;
     }
 
     @Override
