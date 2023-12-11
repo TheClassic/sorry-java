@@ -1,6 +1,6 @@
 package engine;
 
-import java.util.Optional;
+import java.util.Arrays;
 
 public class Positions {
     static public int getSize() { return 2;}
@@ -15,5 +15,10 @@ public class Positions {
 
     public void movePawn(int pawn, int location) {
         pawnLocations[pawn] = location;
+    }
+
+    public boolean allPawnsAtFinish() {
+        return Arrays.stream(pawnLocations)
+                .allMatch(position -> position == FINISH);
     }
 }
