@@ -9,6 +9,10 @@ public class Positions {
     static public int START = 0;
     int[] pawnLocations = {0, 0, 0, 0}; //ToDo make this based on number of colors
 
+    public static boolean isSafe(int position) {
+        return SAFE == position || START == position;
+    }
+
     public int getPawnLocation(int n) {
         return pawnLocations[n];
     }

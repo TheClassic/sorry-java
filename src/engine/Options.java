@@ -2,6 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 
+import static engine.Board.getEquivalentPosition;
 import static java.lang.Math.min;
 
 public class Options {
@@ -18,11 +19,33 @@ public class Options {
             Positions positions = newBoard.get(state.getCurrentTurn());
             if(positions.getPawnLocation(i)!=Positions.HOME) {
                 int newPosition = min(Positions.HOME,positions.getPawnLocation(i)+card);
-                positions.movePawn(i,  newPosition);
+                // todo avoid collision with self
+                positions.movePawn(i, newPosition);
+                enforcePawnCollision(state.getCurrentTurn(), newPosition, newBoard);
                 options.add(newBoard);
             }
         }
         return options;
+    }
+
+    // responsible for determining and enforcing if the current ending position sends another pawn back to start
+    private static boolean enforcePawnCollision(Color currentTurn, int finalPosition, Board newBoard) {
+        for (Color opponentColor : Color.values()) {
+            if(opponentColor == currentTurn) {
+                continue;
+            }
+            int opponentEquivPosition = getEquivalentPosition(currentTurn, finalPosition, opponentColor);
+            if(opponentEquivPosition>0) {
+                Positions opponentPositions = newBoard.get(opponentColor);
+                for(int i=0; i<Positions.getSize(); ++i) {
+                    if(opponentEquivPosition == opponentPositions.getPawnLocation(i)) {
+                        opponentPositions.movePawn(i, Positions.START);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     // the engine should share this with the UI and allow indicating an index for the desired option
