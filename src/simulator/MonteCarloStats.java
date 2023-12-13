@@ -13,7 +13,7 @@ public class MonteCarloStats {
         Arrays.fill(wins, 0); //probably unneccessary
     }
 
-    public void addWin(Color winner) {
+    public synchronized void addWin(Color winner) {
         ++wins[winner.ordinal()];
     }
 

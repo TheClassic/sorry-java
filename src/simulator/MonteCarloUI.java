@@ -4,7 +4,7 @@ import engine.Color;
 
 public class MonteCarloUI {
     int getNumberOfRuns() {
-        return 100;
+        return 10000;
     }
 
     void reportStats(MonteCarloStats stats) {
