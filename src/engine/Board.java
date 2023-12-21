@@ -40,7 +40,7 @@ public class Board {
         int outputPosition = -1;
 
         if(!Positions.isSafe(position)) {
-            outputPosition = position + 10*(((4+outputColor.ordinal()-inputColor.ordinal()))%4);
+            outputPosition = (position + 15*(((4+outputColor.ordinal()-inputColor.ordinal()))%4))%60;
         }
 
         return outputPosition;

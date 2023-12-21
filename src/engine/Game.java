@@ -3,8 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static engine.Color.RED;
-import static engine.Color.YELLOW;
+import static engine.Color.*;
 
 public class Game {
     private State state;
@@ -32,8 +31,10 @@ public class Game {
 
             gamePlayInterface.announceCard(state.getNextCard());
             ArrayList<Board> possibleMoves = Options.getOptions(state);
-            int desiredMove = gamePlayInterface.getMove(possibleMoves);
-            state.makeMove(possibleMoves.get(desiredMove));
+            if(possibleMoves.size()>0) {
+                int desiredMove = gamePlayInterface.getMove(possibleMoves);
+                state.makeMove(possibleMoves.get(desiredMove));
+            }
             state.finishTurn();
         }
         gamePlayInterface.announceWinner(state.getWinner());
@@ -41,7 +42,7 @@ public class Game {
     }
 
     public boolean isPlayerActive(Color player) {
-        return player == YELLOW || player == RED;
+        return player == BLUE || player == YELLOW;
     }
 
     public Color getWinner() {

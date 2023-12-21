@@ -17,6 +17,7 @@ public class MonteCarloEngine {
     ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
 
 
+    //TODO gotta catch exceptions during the game
     public void run() {
         for(int i = 0; i < ui.getNumberOfRuns(); ++i) {
             executorService.submit(() -> {playGame();});
