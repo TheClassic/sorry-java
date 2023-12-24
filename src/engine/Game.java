@@ -30,7 +30,7 @@ public class Game {
             gamePlayInterface.announceBoard(state);
 
             gamePlayInterface.announceCard(state.getNextCard());
-            ArrayList<Board> possibleMoves = Options.getOptions(state);
+            ArrayList<Board> possibleMoves = OptionGenerator.getOptions(state);
             if(possibleMoves.size()>0) {
                 int desiredMove = gamePlayInterface.getMove(possibleMoves);
                 state.makeMove(possibleMoves.get(desiredMove));

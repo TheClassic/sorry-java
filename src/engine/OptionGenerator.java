@@ -4,12 +4,17 @@ import java.util.ArrayList;
 
 import static java.lang.Math.min;
 
-public class Options {
+public class OptionGenerator {
     // returns an array of optional ending states for a turn
     public static ArrayList<Board> getOptions(State state) {
         ArrayList<Board> options = new ArrayList<>();
 
         int card = state.getCurrentCard();
+
+        if(11==card) {
+            return getElevenCardOptions(state);
+        }
+
         Board board = state.getCurrentPositions();
         // should probably refactor positions into ArrayList
         for(int i=0; i<Positions.getSize(); ++i) {
@@ -39,6 +44,55 @@ public class Options {
             }
         }
         return options;
+    }
+
+    public static Option createOptionForMove(Board board, Color turnColor, int pawnIndex, int newPosition) {
+        Board newBoard = board.clone();
+        Positions positions = newBoard.get(turnColor);
+        positions.movePawn(pawnIndex, newPosition);
+        enforcePawnCollision(turnColor, newPosition, newBoard);
+
+        // TODO how we going to find the old position
+        // TODO how do we get info about the old position of any impacted other pawn
+        return ImmutableOption.builder().board(newBoard).newPosition(newPosition);
+    }
+
+    private static ArrayList<Board> getElevenCardOptions(State state) {
+        Board board = state.getCurrentPositions();
+        Color currentTurnColor = state.getCurrentTurn();
+
+        Positions positions = board.get(currentTurnColor);
+        // should probably refactor positions into ArrayList
+        // this should be more like "for each pawn"
+        for (int i = 0; i < Positions.getSize(); ++i) {
+            if (positions.getPawnLocation(i) == Positions.START) {
+                continue;
+            }
+
+            // need to clone every time I find a potential move, not so soon
+            Board newBoard = board.clone();
+
+            if (positions.getPawnLocation(i) != Positions.START) {
+                for (Color opponentColor : Color.values()) {
+                    if (opponentColor == state.getCurrentTurn()) {
+                        continue;
+                    }
+                    // we want to find all swappable opponents add them as options
+                    // however, 11 card logic, sorry card logic, and enforce pawn collision
+                    // will share some logic, lets see if we can extract and reuse that
+                    // after some thought, probably not too much that's reuseable,
+                    // but this should still be a separate testable method
+
+                    // we want to leave the door for other decision making, but
+                    // we probably want to ensure the first choice on the array
+                    // should be the highest numbered opponent
+                    // this should probably be a method that finds all the options
+                    // and sorts them by end spot
+
+                    // make sure to encapsulate and call logic for simply moving forward
+                }
+            }
+        }
     }
 
     // responsible for determining and enforcing if the current ending position sends another pawn back to start

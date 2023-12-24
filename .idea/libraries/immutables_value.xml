@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="immutables.value" type="repository">
+    <properties maven-id="org.immutables:value:2.9.3" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/value-2.9.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
