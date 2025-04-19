@@ -33,6 +33,8 @@ class BoardTest {
     @Test
     void getEquivalentPositionWhenInvalid() {
         assertEquals(-1, Board.getEquivalentPosition(Color.GREEN, 65, Color.RED));
+        assertEquals(-1, Board.getEquivalentPosition(Color.GREEN, Positions.START, Color.RED));
+        assertEquals(-1, Board.getEquivalentPosition(Color.GREEN, 61, Color.RED));
 
     }
 

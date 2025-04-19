@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Positions {
     static public int getSize() { return Color.values().length; }
-    static public int SAFE = 60;
+    static public int SAFE = 61; //assumes first spot is 1, moving back 1 is 0, and last spot before safe is 60
     static public int HOME = 66;
     //TODO make start a large negative number so that negative zero can used as the bridge
     // from the first spot to HOME
@@ -12,7 +12,7 @@ public class Positions {
     int[] pawnLocations = {0, 0, 0, 0}; //ToDo make this based on number of colors
 
     public static boolean isSafe(int position) {
-        return SAFE == position || START == position;
+        return SAFE <= position || START == position;
     }
 
     public int getPawnLocation(int n) {
