@@ -2,36 +2,35 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static engine.Color.*;
+import java.util.Set;
 
 public class Game {
     private State state;
-    final private GamePlayInterface gamePlayInterface;
-
+    private final GamePlayInterface gamePlayInterface;
     private final Random random = new Random();
+    private final Set<Color> activePlayerColors;
 
-    public Game(GamePlayInterface gpi) {
-        gamePlayInterface = gpi;
-        state = new State(this, getFirstPLayer());
+    public Game(GamePlayInterface gpi, Set<Color> activePlayerColors) {
+        this.gamePlayInterface = gpi;
+        this.activePlayerColors = activePlayerColors;
+        this.state = new State(this, getFirstPlayer());
     }
 
-    private Color getFirstPLayer() {
+    private Color getFirstPlayer() {
         Color firstPlayer = Color.values()[random.nextInt(Color.values().length)];
-        // so dirty, but should work well
-        if(!isPlayerActive(firstPlayer)) {
-            firstPlayer = getFirstPLayer();
+        if (!isPlayerActive(firstPlayer)) {
+            firstPlayer = getFirstPlayer();
         }
         return firstPlayer;
     }
 
     public void run() {
-        while(!state.gameOver()) {
+        while (!state.gameOver()) {
             gamePlayInterface.announceBoard(state);
 
             gamePlayInterface.announceCard(state.getNextCard());
             ArrayList<Board> possibleMoves = Options.getOptions(state);
-            if(possibleMoves.size()>0) {
+            if (possibleMoves.size() > 0) {
                 int desiredMove = gamePlayInterface.getMove(possibleMoves);
                 state.makeMove(possibleMoves.get(desiredMove));
             }
@@ -42,7 +41,7 @@ public class Game {
     }
 
     public boolean isPlayerActive(Color player) {
-        return player == BLUE || player == YELLOW;
+        return activePlayerColors.contains(player);
     }
 
     public Color getWinner() {

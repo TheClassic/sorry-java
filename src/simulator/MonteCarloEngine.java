@@ -1,21 +1,24 @@
 package simulator;
 
 import engine.Game;
-import ui.Visualizer;
+import util.GameFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MonteCarloEngine {
-    private GameSimulator simulator = new GameSimulator();
-    private MonteCarloUI ui = new MonteCarloUI();
-    private MonteCarloStats stats = new MonteCarloStats();
+    private final GameFactory gameFactory;
+    private final MonteCarloUI ui = new MonteCarloUI();
+    private final MonteCarloStats stats = new MonteCarloStats();
 
-    private static final int threadCount=4;
+    private static final int threadCount = 4;
 
     ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
 
+    public MonteCarloEngine(GameFactory gameFactory) {
+        this.gameFactory = gameFactory;
+    }
 
     //TODO gotta catch exceptions during the game
     public void run() {
@@ -32,7 +35,7 @@ public class MonteCarloEngine {
     }
 
     private void playGame() {
-        Game game = new Game(simulator);
+        Game game = gameFactory.createGame();
         game.run();
         stats.addWin(game.getWinner());
     }
