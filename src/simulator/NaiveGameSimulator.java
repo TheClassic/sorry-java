@@ -6,7 +6,7 @@ import engine.State;
 
 import java.util.ArrayList;
 
-public class GameSimulator implements engine.GamePlayInterface {
+public class NaiveGameSimulator implements engine.GamePlayInterface {
 
     @Override
     public void announceBoard(State gameState) {

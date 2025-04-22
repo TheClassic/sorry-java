@@ -12,7 +12,11 @@ public class MonteCarloEngine {
     private final MonteCarloUI ui = new MonteCarloUI();
     private final MonteCarloStats stats = new MonteCarloStats();
 
-    private static final int threadCount = 4;
+    private static final int threadCount = Runtime.getRuntime().availableProcessors();
+
+    static {
+        System.out.println("Using " + threadCount + " threads for Monte Carlo simulation.");
+    }
 
     ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
 
@@ -22,14 +26,15 @@ public class MonteCarloEngine {
 
     //TODO gotta catch exceptions during the game
     public void run() {
-        for(int i = 0; i < ui.getNumberOfRuns(); ++i) {
-            executorService.submit(() -> {playGame();});
+        for (int i = 0; i < ui.getNumberOfRuns(); ++i) {
+            executorService.submit(() -> {
+                playGame();
+            });
         }
         executorService.shutdown();
         try {
             executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
         }
         ui.reportStats(stats);
     }

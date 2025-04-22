@@ -1,6 +1,6 @@
 import engine.Color;
 import engine.GamePlayInterface;
-import simulator.GameSimulator;
+import simulator.NaiveGameSimulator;
 import simulator.MonteCarloEngine;
 import util.DefaultGameFactory;
 
@@ -16,7 +16,7 @@ public class Main {
 
         // Press Shift+F10 or click the green arrow button in the gutter to run the code.
 
-        GamePlayInterface gameSimulator = new GameSimulator();
+        GamePlayInterface gameSimulator = new NaiveGameSimulator();
         Set<Color> activeColors = Set.of(Color.BLUE, Color.YELLOW);
         new MonteCarloEngine(new DefaultGameFactory(gameSimulator, activeColors)).run();
 
@@ -32,7 +32,11 @@ public class Main {
         activeColors = Set.of(Color.GREEN, Color.BLUE, Color.YELLOW);
         new MonteCarloEngine(new DefaultGameFactory(gameSimulator, activeColors)).run();
 
+        activeColors = Set.of(Color.GREEN, Color.BLUE, Color.RED);
+        new MonteCarloEngine(new DefaultGameFactory(gameSimulator, activeColors)).run();
 
+        activeColors = Set.of(Color.GREEN, Color.BLUE, Color.RED, Color.YELLOW);
+        new MonteCarloEngine(new DefaultGameFactory(gameSimulator, activeColors)).run();
         // Press Shift+F9 to start debugging your code. We have set one breakpoint
         // for you, but you can always add more by pressing Ctrl+F8.
     }
