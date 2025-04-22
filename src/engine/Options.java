@@ -21,15 +21,17 @@ public class Options {
                     card = 1; //TODO implement a second turn (although its probably not terribly important for this simulation
                     // todo avoid collision with self
                     // todo encapsulate logic of next three lines
-                    int newPosition = 0;
+                    int newPosition = 0; //TODO we need to handle the space between safe and start
                     positions.movePawn(i, newPosition);
                     enforcePawnCollision(state.getCurrentTurn(), newPosition, newBoard);
                     options.add(newBoard);
+                } else if (Deck.SORRY == card) {
+                    createSorryMoveOptions(state.getCurrentTurn(), board, i, options);
                 }
                 continue;
             }
             if(positions.getPawnLocation(i)!=Positions.HOME) {
-                if(12 != card) {
+                if(Deck.SORRY != card) {
                     int newPosition = min(Positions.HOME, positions.getPawnLocation(i) + card);
                     // todo avoid collision with self
                     positions.movePawn(i, newPosition);
@@ -39,6 +41,28 @@ public class Options {
             }
         }
         return options;
+    }
+
+    public static void createSorryMoveOptions(Color currentTurn, Board board, int pawnIndex, ArrayList<Board> options) {
+        for (Color opponentColor : Color.values()) {
+            if (opponentColor == currentTurn) {
+                continue;
+            }
+            Board newBoard = board.clone();
+
+            Positions positions = newBoard.get(opponentColor);
+            for (int i = 0; i < Positions.getSize(); ++i) {
+                if (Positions.isSafe(positions.getPawnLocation(i))) {
+                    continue;
+                }
+                //TODO needs so much more typeSafety and sugar
+                int currentPlayerEquivPosition = Board.getEquivalentPosition(opponentColor, positions.getPawnLocation(i), currentTurn);
+
+                positions.movePawn(pawnIndex, currentPlayerEquivPosition);
+                enforcePawnCollision(currentTurn, currentPlayerEquivPosition, newBoard);
+                options.add(newBoard);
+            }
+        }
     }
 
     // responsible for determining and enforcing if the current ending position sends another pawn back to start
