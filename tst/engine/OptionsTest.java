@@ -15,6 +15,9 @@ class OptionsTest {
         ArrayList<Board> options = new ArrayList<>();
         Options.createSorryMoveOptions(Color.GREEN, testBoard, 0, options);
         assertEquals(1, options.size());
+
+        assertEquals(Positions.START, options.get(0).get(Color.RED).getPawnLocation(0));
+        assertNotEquals(Positions.START, options.get(0).get(Color.GREEN).getPawnLocation(0));
     }
 
     @Test

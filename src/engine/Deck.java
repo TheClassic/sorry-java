@@ -11,7 +11,7 @@ public class Deck {
     // 13 is sorry card
     // TODO there should be 5 one's and 4 of each other card (including Sorry)
     public int getNextCard() {
-        currentCard = random.nextInt(1,13); //TODO add Sorry
+        currentCard = random.nextInt(1,14);
         if(currentCard==6||currentCard==9)
             return getNextCard();
         return currentCard;

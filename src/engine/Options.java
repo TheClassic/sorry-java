@@ -50,15 +50,15 @@ public class Options {
             }
             Board newBoard = board.clone();
 
-            Positions positions = newBoard.get(opponentColor);
+            Positions opponentPositions = newBoard.get(opponentColor);
             for (int i = 0; i < Positions.getSize(); ++i) {
-                if (Positions.isSafe(positions.getPawnLocation(i))) {
+                if (Positions.isSafe(opponentPositions.getPawnLocation(i))) {
                     continue;
                 }
                 //TODO needs so much more typeSafety and sugar
-                int currentPlayerEquivPosition = Board.getEquivalentPosition(opponentColor, positions.getPawnLocation(i), currentTurn);
+                int currentPlayerEquivPosition = Board.getEquivalentPosition(opponentColor, opponentPositions.getPawnLocation(i), currentTurn);
 
-                positions.movePawn(pawnIndex, currentPlayerEquivPosition);
+                newBoard.get(currentTurn).movePawn(pawnIndex, currentPlayerEquivPosition);
                 enforcePawnCollision(currentTurn, currentPlayerEquivPosition, newBoard);
                 options.add(newBoard);
             }
@@ -72,6 +72,7 @@ public class Options {
                 continue;
             }
             int opponentEquivPosition = Board.getEquivalentPosition(currentTurn, finalPosition, opponentColor);
+            // TODO take a closer look at this condition
             if(opponentEquivPosition>0) {
                 Positions opponentPositions = newBoard.get(opponentColor);
                 for(int i=0; i<Positions.getSize(); ++i) {
