@@ -16,7 +16,7 @@ public class Visualizer implements engine.GamePlayInterface {
     @Override
     public void announceBoard(State gameState) {
         Board board = gameState.getCurrentPositions();
-        System.out.println(Color.values()[0] + "\t" + Color.values()[1]);
+        System.out.println(Color.values()[0] + "\t" + Color.values()[1] + Color.values()[2] + Color.values()[3]);
         for(int i=0; i<Positions.getSize(); ++i) {
             String row = "";
             for (Color color : Color.values()) {
@@ -26,6 +26,7 @@ public class Visualizer implements engine.GamePlayInterface {
             }
             System.out.println(row);
         }
+        System.out.println(gameState.getCurrentTurn() + " turn");
     }
 
     @Override
