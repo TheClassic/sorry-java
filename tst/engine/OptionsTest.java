@@ -28,25 +28,33 @@ class OptionsTest {
         assertEquals(0, options.size());
     }
 
-    /*
     @Test
     void testEnforcePawnCollisionFindsCollision() {
         Board testBoard = new Board();
-        testBoard.setPosition(Color.RED, 1);
-        testBoard.setPosition(Color.GREEN, 1);
-        testBoard.enforcePawnCollision(Color.RED, Color.GREEN);
-        assertEquals(Positions.START, testBoard.getPosition(Color.RED));
-        assertEquals(Positions.START, testBoard.getPosition(Color.GREEN));
+        testBoard.get(Color.RED).movePawn(0, 3);
+        testBoard.get(Color.YELLOW).movePawn(0, 3);
+        testBoard.get(Color.GREEN).movePawn(0, 3);
+        testBoard.get(Color.BLUE).movePawn(0, 3);
+
+        assertFalse(Options.enforcePawnCollision(Color.RED, 17, testBoard));
+        assertTrue(Options.enforcePawnCollision(Color.RED, 18, testBoard));
+        assertTrue(Options.enforcePawnCollision(Color.YELLOW, 18, testBoard));
+        assertTrue(Options.enforcePawnCollision(Color.GREEN, 18, testBoard));
+        assertTrue(Options.enforcePawnCollision(Color.BLUE, 18, testBoard));
     }
 
     @Test
     void testEnforcePawnCollisionFindsNoCollision() {
         Board testBoard = new Board();
-        testBoard.setPosition(Color.RED, 1);
-        testBoard.setPosition(Color.GREEN, 2);
-        testBoard.enforcePawnCollision(Color.RED, Color.GREEN);
-        assertEquals(1, testBoard.getPosition(Color.RED));
-        assertEquals(2, testBoard.getPosition(Color.GREEN));
+        testBoard.get(Color.RED).movePawn(0, 3);
+        testBoard.get(Color.YELLOW).movePawn(0, 3);
+        testBoard.get(Color.GREEN).movePawn(0, 3);
+        testBoard.get(Color.BLUE).movePawn(0, 3);
+
+        assertFalse(Options.enforcePawnCollision(Color.RED, 3, testBoard));
+        assertFalse(Options.enforcePawnCollision(Color.YELLOW, 3, testBoard));
+        assertFalse(Options.enforcePawnCollision(Color.GREEN, 3, testBoard));
+        assertFalse(Options.enforcePawnCollision(Color.BLUE, 3, testBoard));
     }
-    */
+
 }
