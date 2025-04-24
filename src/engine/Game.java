@@ -17,10 +17,10 @@ public class Game {
     }
 
     private Color getFirstPlayer() {
-        Color firstPlayer = Color.values()[random.nextInt(Color.values().length)];
-        if (!isPlayerActive(firstPlayer)) {
-            firstPlayer = getFirstPlayer();
-        }
+        Color firstPlayer;
+        do {
+            firstPlayer = Color.values()[random.nextInt(Color.values().length)];
+        } while (!isPlayerActive(firstPlayer));
         return firstPlayer;
     }
 
