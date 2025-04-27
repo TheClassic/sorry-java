@@ -31,7 +31,7 @@ public class Game {
             gamePlayInterface.announceCard(state.getNextCard());
             ArrayList<Board> possibleMoves = Options.getOptions(state);
             if (possibleMoves.size() > 0) {
-                int desiredMove = gamePlayInterface.getMove(possibleMoves);
+                int desiredMove = gamePlayInterface.getMove(state.getCurrentTurn(), possibleMoves);
                 state.makeMove(possibleMoves.get(desiredMove));
             }
             state.finishTurn();

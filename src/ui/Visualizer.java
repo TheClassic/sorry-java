@@ -17,7 +17,7 @@ public class Visualizer implements engine.GamePlayInterface {
     public void announceBoard(State gameState) {
         Board board = gameState.getCurrentPositions();
         System.out.println(Color.values()[0] + "\t" + Color.values()[1] + Color.values()[2] + Color.values()[3]);
-        for(int i=0; i<Positions.getSize(); ++i) {
+        for(int i=0; i<Positions.NUM_PAWNS; ++i) {
             String row = "";
             for (Color color : Color.values()) {
                 Positions positions = board.get(color);
@@ -35,7 +35,7 @@ public class Visualizer implements engine.GamePlayInterface {
     }
 
     @Override
-    public int getMove(ArrayList<Board> options) {
+    public int getMove(Color turn, ArrayList<Board> options) {
         try {
             reader.readLine();
         }

@@ -12,7 +12,7 @@ public class Options {
         int card = state.getCurrentCard();
         Board board = state.getCurrentPositions();
         // should probably refactor positions into ArrayList
-        for(int i=0; i<Positions.getSize(); ++i) {
+        for(int i=0; i<Positions.NUM_PAWNS; ++i) {
             Board newBoard = board.clone();
 
             Positions positions = newBoard.get(state.getCurrentTurn());
@@ -51,7 +51,7 @@ public class Options {
             Board newBoard = board.clone();
 
             Positions opponentPositions = newBoard.get(opponentColor);
-            for (int i = 0; i < Positions.getSize(); ++i) {
+            for (int i = 0; i < Positions.NUM_PAWNS; ++i) {
                 if (Positions.isSafe(opponentPositions.getPawnLocation(i))) {
                     continue;
                 }
@@ -75,7 +75,7 @@ public class Options {
             // TODO take a closer look at this condition
             if(opponentEquivPosition>0) {
                 Positions opponentPositions = newBoard.get(opponentColor);
-                for(int i=0; i<Positions.getSize(); ++i) {
+                for(int i=0; i<Positions.NUM_PAWNS; ++i) {
                     if(opponentEquivPosition == opponentPositions.getPawnLocation(i)) {
                         opponentPositions.movePawn(i, Positions.START);
                         return true;

@@ -7,7 +7,7 @@ public interface GamePlayInterface {
 
     void announceCard(int cardValue);
 
-    int getMove(ArrayList<Board> options);
+    int getMove(Color turn, ArrayList<Board> options);
 
     void announceWinner(Color winner);
 }
